@@ -1,9 +1,11 @@
 FROM python:3.9-alpine
 
-COPY requirements.txt requirements.txt
+WORKDIR /hw1
+
+COPY requirements.txt /hw1
 RUN pip3 install --upgrade pip -r requirements.txt
 
-COPY . .
+COPY . /hw1
 
 EXPOSE 5000
 
