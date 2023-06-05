@@ -1,4 +1,7 @@
-FROM python:3.9-alpine
+ARG python_ver=3.9
+ARG os_ver=alpine
+
+FROM python:${python_ver}-${os_ver}
 
 WORKDIR /hw1
 
