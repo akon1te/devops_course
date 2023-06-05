@@ -1,4 +1,4 @@
-name: Pylint
+name: Python linter 
 
 on: [push, pull_request]
 
@@ -6,7 +6,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Python Pylin GitHub Action
-      uses: fylein/python-pylint-github-action@v1
-      with:
-        args: pip3 install -r requirements.txt && pylint --rcfile=.pylintrc devops-course
+      - 
+        uses: actions/checkout@v3
+      - 
+        name: Lint
+        uses: sunnysid3up/python-linter@master
+        with:
+          source: app
+          strict: low
+          mypy-options: "--ignore-missing-imports --show-error-codes"
+          pylint-options: "--rcfile=setup.cfg"
+          isort-options: "-w 100"
