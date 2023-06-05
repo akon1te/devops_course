@@ -1,14 +1,14 @@
-name: Build after changes
+name: Rebuild after changes
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  lint:
+  pylint:
     uses: ./.github/workflows/pylint.yml
   build_push:
-    needs: lint
+    needs: pylint
     uses: ./.github/workflows/build_push.yml
     secrets: 
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -17,6 +17,7 @@ jobs:
     needs: build_push
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          docker pull akon1te/devops_course:latest
-          docker run ailurus1/devops_course:latest
+      - 
+        run: |
+          docker pull akon1te/my_app:latest
+          docker run -it -p 5000:5000 akon1te/my_app:latest
